@@ -49,3 +49,13 @@ button {
   padding: 10px;
   font-size: 16px;
 }
+
+.correct-option {
+  background-color: green;
+  color: white;
+}
+
+.incorrect-option {
+  background-color: red;
+  color: white;
+}

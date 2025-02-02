@@ -20,16 +20,16 @@ const Quiz = () => {
   }, []);
 
   const handleAnswer = (isCorrect, optionIndex) => {
+    if (answeredQuestions.includes(currentQuestion)) return;
     const updatedSelectedOptions = [...selectedOptions];
-    updatedSelectedOptions[currentQuestion] = optionIndex;
+    updatedSelectedOptions[currentQuestion] = { optionIndex, isCorrect };
     setSelectedOptions(updatedSelectedOptions);
 
-    if (!answeredQuestions.includes(currentQuestion)) {
-      if (isCorrect) {
-        setScore(score + parseFloat(quiz.correct_answer_marks));
-      }
-      setAnsweredQuestions([...answeredQuestions, currentQuestion]);
+    if (isCorrect) {
+      const marks = parseFloat(quiz.correct_answer_marks); 
+      setScore(score + marks);
     }
+    setAnsweredQuestions([...answeredQuestions, currentQuestion]);
   };
 
   const handleNext = () => {
@@ -37,12 +37,6 @@ const Quiz = () => {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResults(true);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
     }
   };
 
@@ -55,7 +49,13 @@ const Quiz = () => {
   };
 
   if (!quiz) return <p>Loading...</p>;
-  if (showResults) return <Results score={score} total={quiz.questions.length} onRestart={handleRestart} />;
+
+  // Calculate total marks
+  const totalMarks = quiz.questions.length * parseFloat(quiz.correct_answer_marks);
+
+  if (showResults) {
+    return <Results score={score} total={totalMarks} onRestart={handleRestart} />;
+  }
 
   return (
     <div>
@@ -64,17 +64,16 @@ const Quiz = () => {
       <Question
         question={quiz.questions[currentQuestion]}
         onAnswer={handleAnswer}
-        selectedOption={selectedOptions[currentQuestion]}
+        selectedOption={selectedOptions[currentQuestion]?.optionIndex}
+        selectedOptionCorrect={selectedOptions[currentQuestion]?.isCorrect}
       />
 
       <div>
-        <button onClick={handlePrevious} disabled={currentQuestion === 0}>
-          Previous
-        </button>
         <button onClick={handleNext} disabled={selectedOptions[currentQuestion] === undefined}>
           {currentQuestion === quiz.questions.length - 1 ? "Finish" : "Next"}
         </button>
       </div>
+      <p>Score: {score} / {totalMarks}</p>
     </div>
   );
 };

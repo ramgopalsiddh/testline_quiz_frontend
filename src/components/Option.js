@@ -1,15 +1,18 @@
 import React from "react";
 
-const Option = ({ option, onAnswer, isSelected, optionIndex }) => {
+const Option = ({ option, onAnswer, isSelected, isCorrect, isAnswerWrong, optionIndex, isDisabled }) => {
   const handleClick = () => {
-    onAnswer(option.is_correct, optionIndex);
+    if (!isDisabled) {
+      onAnswer(isCorrect, optionIndex);
+    }
   };
 
   return (
     <button
       onClick={handleClick}
       style={{
-        backgroundColor: isSelected ? "lightblue" : "white",
+        backgroundColor: isSelected ? (isCorrect ? "green" : "red") : "white",
+        pointerEvents: isDisabled ? "none" : "auto",
       }}
     >
       {option.description}
