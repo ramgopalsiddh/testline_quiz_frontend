@@ -1,3 +1,8 @@
+<img src="Screenshots/Screenshot from 2025-02-02 22-22-35.png">
+<img src="Screenshots/Screenshot from 2025-02-02 22-22-43.png">
+<img src="Screenshots/Screenshot from 2025-02-02 22-23-14.png">
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
