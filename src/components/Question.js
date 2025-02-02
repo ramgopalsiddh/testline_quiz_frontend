@@ -1,13 +1,14 @@
 import React from "react";
 import Option from "../components/Option";
+import "./Question.css";
 
-const Question = ({ question, onAnswer, selectedOption, selectedOptionCorrect }) => {
-  // Extract reading material
+const Question = ({ question, onAnswer, selectedOption, selectedOptionCorrect, questionNumber }) => {
   const readingMaterial = question.reading_material;
 
   return (
-    <div>
-      <h3>{question.description}</h3>
+    <div className="question-container">
+      {/* Display question number before description */}
+      <h3 className="question-text">{`Question ${questionNumber}: ${question.description}`}</h3>
       
       {question.options.map((option, index) => {
         const isSelected = selectedOption === index;
@@ -23,24 +24,21 @@ const Question = ({ question, onAnswer, selectedOption, selectedOptionCorrect })
             isCorrect={isCorrect}
             isAnswerWrong={isAnswerWrong}
             optionIndex={index}
-            isDisabled={selectedOption !== undefined} // Disable option if selected
+            isDisabled={selectedOption !== undefined}
           />
         );
       })}
 
       {selectedOptionCorrect === false && (
         <div className="feedback">
-          <p style={{ color: 'red' }}>Incorrect. The correct answer is:</p>
-          <p>{question.options.find(option => option.is_correct)?.description}</p>
+          <p className="incorrect-answer">Answer is Incorrect</p>
+          <p className="correct-answer">The correct answer is: {question.options.find(option => option.is_correct)?.description}</p>
           
           {readingMaterial && readingMaterial.content_sections && readingMaterial.content_sections.length > 0 && (
             <div className="reading-material">
               <h4>Reading Material</h4>
               {readingMaterial.content_sections.map((section, index) => (
-                <div 
-                  key={index} 
-                  dangerouslySetInnerHTML={{ __html: section }} 
-                />
+                <div key={index} dangerouslySetInnerHTML={{ __html: section }} />
               ))}
             </div>
           )}

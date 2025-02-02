@@ -1,4 +1,5 @@
 import React from "react";
+import "./Option.css";
 
 const Option = ({ option, onAnswer, isSelected, isCorrect, isAnswerWrong, optionIndex, isDisabled }) => {
   const handleClick = () => {
@@ -7,13 +8,17 @@ const Option = ({ option, onAnswer, isSelected, isCorrect, isAnswerWrong, option
     }
   };
 
+  const buttonClass = isSelected
+    ? isCorrect
+      ? "correct-option"
+      : "incorrect-option"
+    : "";
+
   return (
     <button
       onClick={handleClick}
-      style={{
-        backgroundColor: isSelected ? (isCorrect ? "green" : "red") : "white",
-        pointerEvents: isDisabled ? "none" : "auto",
-      }}
+      className={`${buttonClass} ${isDisabled ? "disabled-option" : ""}`}
+      disabled={isDisabled}
     >
       {option.description}
     </button>

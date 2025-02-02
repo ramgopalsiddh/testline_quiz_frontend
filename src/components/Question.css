@@ -1,0 +1,26 @@
+.question-container {
+    margin-bottom: 20px;
+  }
+  
+  .question-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .feedback {
+    margin-top: 20px;
+  }
+  
+  .incorrect-answer {
+    color: red;
+  }
+  
+  .correct-answer {
+    color: green;
+  }
+  
+  .reading-material {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  

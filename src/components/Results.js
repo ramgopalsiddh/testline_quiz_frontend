@@ -1,10 +1,11 @@
 import React from "react";
+import "./Results.css";
 
 const Results = ({ score, total, onRestart }) => {
   return (
-    <div>
-      <h2>Your Score: {score} / {total}</h2>
-      <button onClick={onRestart}>Restart</button>
+    <div className="results-container">
+      <h2 className="results-score">Your Score: {score} / {total}</h2>
+      <button onClick={onRestart} className="restart-button">Restart</button>
     </div>
   );
 };

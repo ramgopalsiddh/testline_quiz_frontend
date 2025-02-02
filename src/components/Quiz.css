@@ -1,0 +1,37 @@
+.quiz-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .quiz-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .quiz-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .quiz-controls {
+    margin-top: 20px;
+  }
+  
+  .next-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .next-button:disabled {
+    background-color: #ccc;
+  }
+  
+  .score-display {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  

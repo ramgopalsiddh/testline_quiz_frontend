@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchQuizData } from "../services/api";
 import Question from "../components/Question";
 import Results from "../components/Results";
+import "./Quiz.css";
 
 const Quiz = () => {
   const [quiz, setQuiz] = useState(null);
@@ -50,7 +51,6 @@ const Quiz = () => {
 
   if (!quiz) return <p>Loading...</p>;
 
-  // Calculate total marks
   const totalMarks = quiz.questions.length * parseFloat(quiz.correct_answer_marks);
 
   if (showResults) {
@@ -58,22 +58,27 @@ const Quiz = () => {
   }
 
   return (
-    <div>
-      <h2>{quiz.title}</h2>
-      <p>{quiz.description}</p>
+    <div className="quiz-container">
+      <h2 className="quiz-title">Quiz Title : {quiz.title}</h2>
+      
       <Question
         question={quiz.questions[currentQuestion]}
         onAnswer={handleAnswer}
         selectedOption={selectedOptions[currentQuestion]?.optionIndex}
         selectedOptionCorrect={selectedOptions[currentQuestion]?.isCorrect}
+        questionNumber={currentQuestion + 1}
       />
 
-      <div>
-        <button onClick={handleNext} disabled={selectedOptions[currentQuestion] === undefined}>
+      <div className="quiz-controls">
+        <button 
+          onClick={handleNext} 
+          disabled={selectedOptions[currentQuestion] === undefined} 
+          className="next-button"
+        >
           {currentQuestion === quiz.questions.length - 1 ? "Finish" : "Next"}
         </button>
       </div>
-      <p>Score: {score} / {totalMarks}</p>
+      <p className="score-display">Score: {score} / {totalMarks}</p>
     </div>
   );
 };
