@@ -1,8 +1,17 @@
 import React from "react";
 
-const Option = ({ option, onAnswer }) => {
+const Option = ({ option, onAnswer, isSelected, optionIndex }) => {
+  const handleClick = () => {
+    onAnswer(option.is_correct, optionIndex);
+  };
+
   return (
-    <button onClick={() => onAnswer(option.is_correct)}>
+    <button
+      onClick={handleClick}
+      style={{
+        backgroundColor: isSelected ? "lightblue" : "white",
+      }}
+    >
       {option.description}
     </button>
   );
